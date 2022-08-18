@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import lombok.Data;
 
@@ -27,13 +25,9 @@ public class Postulant {
     String numero;
     String email;
 
-    @ManyToOne
-    @JoinColumn(name = "id_list")
-    ListePostulant listePostulant;
-
     @ManyToMany
-    @JoinTable(name = "PopulationRegion", joinColumns = { @JoinColumn(name = "id_postulant") }, inverseJoinColumns = {
-            @JoinColumn(name = "id_tirage") })
-    List<Tirage> tirages = new ArrayList<>();
+    @JoinTable(name = "PostulantListe", joinColumns = { @JoinColumn(name = "id_postulant") }, inverseJoinColumns = {
+            @JoinColumn(name = "id_liste") })
+    List<ListePostulant> listePostulant = new ArrayList<>();
 
 }
