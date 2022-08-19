@@ -19,4 +19,10 @@ public class ListePopulationServiceImpl implements ListePopulationService {
         return repos.save(listepostulant);
     }
 
+    @Override
+    public ListePostulant retrouveParLibelle(String libelle) {
+        // TODO Auto-generated method stub
+        return repos.findByLibelle(libelle);
+    }
+
 }

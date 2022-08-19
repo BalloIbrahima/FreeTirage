@@ -7,5 +7,5 @@ import com.freeTirage.apitirage.ApiTirage.models.ListePostulant;
 
 @Repository
 public interface ListePostulantRepository extends JpaRepository<ListePostulant, Long> {
-
+    ListePostulant findByLibelle(String libelle);
 }
