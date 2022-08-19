@@ -1,5 +1,7 @@
 package com.freeTirage.apitirage.ApiTirage.servicesImplementation;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,12 @@ public class PostulantServiceImpl implements PostulantService {
     public Postulant creerPostulant(Postulant postulant) {
         // TODO Auto-generated method stub
         return repos.save(postulant);
+    }
+
+    @Override
+    public List<Postulant> saveList(List<Postulant> postulants) {
+        // TODO Auto-generated method stub
+        return repos.saveAll(postulants);
     }
 
 }

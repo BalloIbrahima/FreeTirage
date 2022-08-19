@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.freeTirage.apitirage.ApiTirage.configuration.ExelConfig;
 import com.freeTirage.apitirage.ApiTirage.models.ListePostulant;
 import com.freeTirage.apitirage.ApiTirage.services.ListePopulationService;
 
@@ -25,14 +26,23 @@ public class ListePostulantController {
     @PostMapping("/create")
     public Object createListe(@RequestBody ListePostulant liste, @RequestParam("file") MultipartFile file) {
 
-        // vérification de l'existance de la liste
-        ListePostulant listePostulant = service.retrouveParLibelle(liste.getLibelle());
-        if (liste == null) {
-            // La liste n'existe pas, dons on la crée
-            return "Cette liste existe deja";
+        // on verifie d'abord si le fichier fornit est de type Excel
+        if (ExelConfig.verifier(file)) {
+            // vérification de l'existance de la liste dans la base de donnée
+            ListePostulant listePostulant = service.retrouveParLibelle(liste.getLibelle());
+            if (liste == null) {
+                // La liste n'existe pas, dons on la crée
+                ListePostulant listeEnregistre = service.creerPListe(liste);
+                return "Cette liste existe deja";
+
+            } else {
+                // Il existe une liste avec la même libelle
+                return "Cette liste existe deja";
+            }
 
         } else {
-            return "Cette liste existe deja";
+            // le fichier fournit n'est pas Excel
+            return "Veuiller founir un fichier Excel";
         }
 
     }
