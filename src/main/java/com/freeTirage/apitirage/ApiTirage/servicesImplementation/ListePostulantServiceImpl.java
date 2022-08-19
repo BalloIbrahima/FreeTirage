@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service;
 
 import com.freeTirage.apitirage.ApiTirage.models.ListePostulant;
 import com.freeTirage.apitirage.ApiTirage.repository.ListePostulantRepository;
-import com.freeTirage.apitirage.ApiTirage.services.ListePopulationService;
+import com.freeTirage.apitirage.ApiTirage.services.ListePostulantService;
 
 @Service
-public class ListePopulationServiceImpl implements ListePopulationService {
+public class ListePostulantServiceImpl implements ListePostulantService {
 
     @Autowired
     ListePostulantRepository repos;

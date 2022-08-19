@@ -1,8 +1,9 @@
 package com.freeTirage.apitirage.ApiTirage.controllers;
 
+import com.freeTirage.apitirage.ApiTirage.excel.ImportExcelPostulant;
+import com.freeTirage.apitirage.ApiTirage.models.Postulant;
+import com.freeTirage.apitirage.ApiTirage.repository.ImportPostulantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,14 +13,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.freeTirage.apitirage.ApiTirage.models.ListePostulant;
-import com.freeTirage.apitirage.ApiTirage.services.ListePopulationService;
+import com.freeTirage.apitirage.ApiTirage.services.ListePostulantService;
+
+import java.util.List;
 
 @RequestMapping("/listePostulant")
 @Controller
 public class ListePostulantController {
 
     @Autowired
-    ListePopulationService service;
+    ListePostulantService service;
+    @Autowired
+    ImportPostulantRepository ImExP;
 
     // pour le création d'une liste
     @PostMapping("/create")
@@ -36,5 +41,19 @@ public class ListePostulantController {
         }
 
     }
+
+
+    @RequestMapping("/import/excel")
+    @ResponseBody
+    public String importP() {
+        ImportExcelPostulant excelImporter=new ImportExcelPostulant();
+        List<Postulant> listPostulant= excelImporter.excelImport();
+        //ImExP.ImportP((Postulant) listPostulant);
+        ImExP.saveAll(listPostulant);
+        return "Import Successfully";
+
+    }
+
+
 
 }

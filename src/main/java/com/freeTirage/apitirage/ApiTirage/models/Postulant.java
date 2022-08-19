@@ -11,8 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import lombok.Data;
+import lombok.*;
 
+
+@Getter
+@Setter
 @Data
 @Entity
 public class Postulant {
@@ -30,4 +33,21 @@ public class Postulant {
             @JoinColumn(name = "id_liste") })
     List<ListePostulant> listePostulant = new ArrayList<>();
 
+
+    public Postulant(long id, String nom, String prenom, String numero, String email) {
+        super();
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.numero = numero;
+        this.email = email;
+    }
+    public Postulant() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+
 }
+
+
