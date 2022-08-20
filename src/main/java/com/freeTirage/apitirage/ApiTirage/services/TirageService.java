@@ -8,4 +8,5 @@ public interface TirageService {
 
     // Modification d'un postulant
     Tirage modifierTirage(Tirage tirage);
+
 }
