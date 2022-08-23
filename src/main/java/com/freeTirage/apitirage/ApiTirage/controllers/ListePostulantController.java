@@ -65,13 +65,14 @@ public class ListePostulantController {
 
                 for (Postulant p : postulants) {
 
-                    if (postulantService.RetrouveParMail(p.getEmail()) == null) {
+                    if (postulantService.RetrouveParMail(p.getEmail()) == null
+                            & p.getNom() != null & p.getPrenom() != null) {
                         Postulant pc = postulantService.creerPostulant(p);
 
                         p.getListePostulant().add(lp);
                         lp.getPostulants().add(pc);
 
-                    } else {
+                    } else if (p.getEmail() != null & p.getNom() != null & p.getPrenom() != null) {
                         Postulant pc = postulantService.RetrouveParMail(p.getEmail());
                         lp.getPostulants().add(pc);
 
@@ -89,7 +90,8 @@ public class ListePostulantController {
 
         } else {
             // le fichier fournit n'est pas Excel
-            return ResponseMessage.generateResponse("Veuiller founir un fichier Excel", HttpStatus.BAD_REQUEST, null);
+            return ResponseMessage.generateResponse("Veuiller founir un fichier Excel valide!", HttpStatus.BAD_REQUEST,
+                    null);
 
         }
 

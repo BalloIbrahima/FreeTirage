@@ -17,6 +17,7 @@ import com.freeTirage.apitirage.ApiTirage.models.Postulant;
 public class ExelConfig {
 
     public static String excelType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+    // public static String excelType = "application/vnd.ms-excel";
 
     // Methode qui verifi si le fichier est un fichier Excel
     public static Boolean verifier(MultipartFile file) {
