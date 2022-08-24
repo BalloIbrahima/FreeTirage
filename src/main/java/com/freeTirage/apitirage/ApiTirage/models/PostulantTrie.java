@@ -20,4 +20,7 @@ public class PostulantTrie {
     @ManyToOne
     @JoinColumn(name = "id_tirage")
     Tirage tirage;
+
+    @ManyToOne
+    Postulant postulants;
 }
