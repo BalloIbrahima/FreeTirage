@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -24,6 +26,7 @@ public class Tirage {
     Date date;
     String libelle;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_liste")
     ListePostulant listePostulant;

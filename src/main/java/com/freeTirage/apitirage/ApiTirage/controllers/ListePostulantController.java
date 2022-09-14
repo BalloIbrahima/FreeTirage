@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,7 @@ import com.freeTirage.apitirage.ApiTirage.models.Postulant;
 import com.freeTirage.apitirage.ApiTirage.services.ListePostulantService;
 import com.freeTirage.apitirage.ApiTirage.services.PostulantService;
 
+@CrossOrigin
 @RequestMapping("/listePostulant")
 @Controller
 public class ListePostulantController {
@@ -80,21 +83,50 @@ public class ListePostulantController {
 
                 }
 
-                return ResponseMessage.generateResponse("Voici le tri", HttpStatus.OK,
+                return ResponseMessage.generateResponse("ok", HttpStatus.OK,
                         postulantService.tirage(service.creerListe(lp), nombre));
 
             } else {
                 // Il existe une liste avec la même libelle
-                return ResponseMessage.generateResponse("Cette lise existe deja", HttpStatus.ALREADY_REPORTED, null);
+                return ResponseMessage.generateResponse("Cette lise existe deja", HttpStatus.OK, null);
             }
 
         } else {
             // le fichier fournit n'est pas Excel
-            return ResponseMessage.generateResponse("Veuiller founir un fichier Excel valide!", HttpStatus.BAD_REQUEST,
+            return ResponseMessage.generateResponse("Veuiller fournir un fichier Excel valide!", HttpStatus.OK,
                     null);
 
         }
 
     }
 
+    // recupere la liste des listes
+    @GetMapping("/list")
+    public ResponseEntity<Object> Liste() {
+
+        try {
+            return ResponseMessage.generateResponse("ok", HttpStatus.OK, service.laListe());
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            return ResponseMessage.generateResponse("Erreur",
+                    HttpStatus.OK, null);
+        }
+
+    }
+
+    // recuperer le nombre de liste
+    @GetMapping("/nombre")
+    public ResponseEntity<Object> nombreListe() {
+
+        try {
+            return ResponseMessage.generateResponse("ok", HttpStatus.OK, service.nombre());
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            return ResponseMessage.generateResponse("Erreur",
+                    HttpStatus.NOT_FOUND, null);
+        }
+
+    }
 }

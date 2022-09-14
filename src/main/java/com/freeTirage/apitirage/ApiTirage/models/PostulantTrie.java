@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -17,6 +19,7 @@ public class PostulantTrie {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_tirage")
     Tirage tirage;
