@@ -24,7 +24,6 @@ public class PostulantTrie {
     @JoinColumn(name = "id_tirage")
     Tirage tirage;
 
-    @JsonIgnore
     @ManyToOne
     Postulant postulants;
 }
