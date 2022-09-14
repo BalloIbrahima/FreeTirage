@@ -16,6 +16,7 @@ import com.freeTirage.apitirage.ApiTirage.models.Postulant;
 
 public class ExelConfig {
 
+    // remise des branches
     public static String excelType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
     // public static String excelType = "application/vnd.ms-excel";
 

@@ -106,4 +106,10 @@ public class PostulantServiceImpl implements PostulantService {
 
     }
 
+    @Override
+    public Postulant RetrouveParId(Long id) {
+        // TODO Auto-generated method stub
+        return repos.findById(id).get();
+    }
+
 }
