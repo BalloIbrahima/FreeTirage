@@ -61,7 +61,7 @@ public class PostulantServiceImpl implements PostulantService {
     }
 
     @Override
-    public List<Postulant> tirage(ListePostulant list, int nombre) {
+    public List<Postulant> tirage(ListePostulant list, int nombre, String libelleTirage) {
 
         // declaration de la liste qui sera retourne
         List<Postulant> listpostulant = new ArrayList<>();
@@ -85,7 +85,7 @@ public class PostulantServiceImpl implements PostulantService {
         // creation du trie
         Tirage tirage = new Tirage();
         tirage.setDate(new Date());
-        tirage.setLibelle("Resultat" + list.getLibelle() + " " + new Date());
+        tirage.setLibelle(libelleTirage);
         tirage.setListePostulant(list);
 
         // enregistrement du tirage

@@ -33,13 +33,14 @@ public class TrieController {
     PostulantService postulantService;
 
     // pour la création d'un trie
-    @GetMapping("/{libelle}/{nombre}")
+    @GetMapping("/{libelle}/{nombre}/{libelleTirage}")
     public ResponseEntity<Object> createListe(@PathVariable(value = "libelle") String libelle,
-            @PathVariable(value = "nombre") Integer nombre) {
+            @PathVariable(value = "nombre") Integer nombre,
+            @PathVariable(value = "libelleTirage") String libelleTirage) {
 
         ListePostulant listePostulant = listePostulantService.retrouveParLibelle(libelle);
         if (listePostulant != null) {
-            List<Postulant> postulants = postulantService.tirage(listePostulant, nombre);
+            List<Postulant> postulants = postulantService.tirage(listePostulant, nombre, libelleTirage);
 
             // atribution du tirage
 

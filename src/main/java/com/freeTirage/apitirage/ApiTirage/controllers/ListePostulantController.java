@@ -35,9 +35,10 @@ public class ListePostulantController {
     PostulantService postulantService;
 
     // pour la création d'une liste
-    @PostMapping("/create/{libelle}/{nombre}")
+    @PostMapping("/create/{libelle}/{nombre}/{libelleTirage}")
     public ResponseEntity<Object> createListe(@RequestParam("file") MultipartFile file,
-            @PathVariable(value = "libelle") String libelle, @PathVariable(value = "nombre") Integer nombre)
+            @PathVariable(value = "libelle") String libelle, @PathVariable(value = "nombre") Integer nombre,
+            @PathVariable(value = "libelleTirage") String libelleTirage)
             throws IOException {
 
         // String nomfile[] = file.getOriginalFilename().split(".");
@@ -84,7 +85,7 @@ public class ListePostulantController {
                 }
 
                 return ResponseMessage.generateResponse("ok", HttpStatus.OK,
-                        postulantService.tirage(service.creerListe(lp), nombre));
+                        postulantService.tirage(service.creerListe(lp), nombre, libelleTirage));
 
             } else {
                 // Il existe une liste avec la même libelle
@@ -125,7 +126,7 @@ public class ListePostulantController {
         } catch (Exception e) {
             // TODO: handle exception
             return ResponseMessage.generateResponse("Erreur",
-                    HttpStatus.NOT_FOUND, null);
+                    HttpStatus.OK, null);
         }
 
     }
